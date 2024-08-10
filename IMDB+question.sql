@@ -613,27 +613,10 @@ WHERE
     g.genre = 'Thriller';
 
 
+-- 25. Genre-wise running total and moving average
 
-
-
-/* Until now, you have analysed various tables of the data set. 
-Now, you will perform some tasks that will give you a broader understanding of the data in this segment.*/
-
--- Segment 4:
-
--- Q25. What is the genre-wise running total and moving average of the average movie duration? 
--- (Note: You need to show the output table in the question.) 
-/* Output format:
-+---------------+-------------------+---------------------+----------------------+
-| genre			|	avg_duration	|running_total_duration|moving_avg_duration  |
-+---------------+-------------------+---------------------+----------------------+
-|	comdy		|			145		|	       106.2	  |	   128.42	    	 |
-|		.		|			.		|	       .		  |	   .	    		 |
-|		.		|			.		|	       .		  |	   .	    		 |
-|		.		|			.		|	       .		  |	   .	    		 |
-+---------------+-------------------+---------------------+----------------------+*/
--- Type your code below:
-
+-- Objective: The genre-wise running total and moving average of the average movie duration.
+-- SQL Query:
 
 
 WITH genre_summary AS
@@ -658,26 +641,11 @@ FROM
 
 
 
--- Round is good to have and not a must have; Same thing applies to sorting
 
+-- 26. Let us find top 5 movies of each year with top 3 genres.
 
--- Let us find top 5 movies of each year with top 3 genres.
-
--- Q26. Which are the five highest-grossing movies of each year that belong to the top three genres? 
--- (Note: The top 3 genres would have the most number of movies.)
-
-/* Output format:
-+---------------+-------------------+---------------------+----------------------+-----------------+
-| genre			|	year			|	movie_name		  |worldwide_gross_income|movie_rank	   |
-+---------------+-------------------+---------------------+----------------------+-----------------+
-|	comedy		|			2017	|	       indian	  |	   $103244842	     |		1	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-+---------------+-------------------+---------------------+----------------------+-----------------+*/
--- Type your code below:
-
--- Top 3 Genres based on most number of movies
+-- Objective: The five highest-grossing movies of each year that belong to the top three genres.
+-- SQL Query:
 
 
 
@@ -720,22 +688,10 @@ WHERE movie_rank<=5;
 
 
 
+-- 27. Let’s find out the names of the top two production houses that have produced the highest number of hits among multilingual movies.
 
-
-
--- Finally, let’s find out the names of the top two production houses that have produced the highest number of hits among multilingual movies.
--- Q27.  Which are the top two production houses that have produced the highest number of hits (median rating >= 8) among multilingual movies?
-/* Output format:
-+-------------------+-------------------+---------------------+
-|production_company |movie_count		|		prod_comp_rank|
-+-------------------+-------------------+---------------------+
-| The Archers		|		830			|		1	  		  |
-|	.				|		.			|			.		  |
-|	.				|		.			|			.		  |
-+-------------------+-------------------+---------------------+*/
--- Type your code below:
-
-
+-- Objective: The top two production houses that have produced the highest number of hits (median rating >= 8) among multilingual movies.
+-- SQL Query:
 
 
 
@@ -752,21 +708,10 @@ GROUP BY m.production_company
 LIMIT 2;
 
 
+-- 28. Top three actresses in the drama genre based on the number of super hit movies.
 
--- Multilingual is the important piece in the above question. It was created using POSITION(',' IN languages)>0 logic
--- If there is a comma, that means the movie is of more than one language
-
-
--- Q28. Who are the top 3 actresses based on number of Super Hit movies (average rating >8) in drama genre?
-/* Output format:
-+---------------+-------------------+---------------------+----------------------+-----------------+
-| actress_name	|	total_votes		|	movie_count		  |actress_avg_rating	 |actress_rank	   |
-+---------------+-------------------+---------------------+----------------------+-----------------+
-|	Laura Dern	|			1016	|	       1		  |	   9.60			     |		1	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-+---------------+-------------------+---------------------+----------------------+-----------------+*/
--- Type your code below:
+-- Objective: The top 3 actresses based on number of Super Hit movies (average rating >8) in drama genre.
+-- SQL Query:
 
 
 WITH actor_ratings AS
@@ -806,12 +751,11 @@ LIMIT 3;
 
 
 
+-- 29. Detailed information for the top nine directors based on the number of movies directed.
 
 
-
-
-/* Q29. Get the following details for top 9 directors (based on number of movies)
-Director id
+-- Objective: Get the following details for top 9 directors (based on number of movies)
+/*Director id
 Name
 Number of movies
 Average inter movie duration in days
@@ -819,25 +763,10 @@ Average movie ratings
 Total votes
 Min rating
 Max rating
-total movie durations
+total movie durations*/
 
-Format:
-+---------------+-------------------+---------------------+----------------------+--------------+--------------+------------+------------+----------------+
-| director_id	|	director_name	|	number_of_movies  |	avg_inter_movie_days |	avg_rating	| total_votes  | min_rating	| max_rating | total_duration |
-+---------------+-------------------+---------------------+----------------------+--------------+--------------+------------+------------+----------------+
-|nm1777967		|	A.L. Vijay		|			5		  |	       177			 |	   5.65	    |	1754	   |	3.7		|	6.9		 |		613		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-+---------------+-------------------+---------------------+----------------------+--------------+--------------+------------+------------+----------------+
+-- SQL Query:
 
---------------------------------------------------------------------------------------------*/
--- Type you code below:
 
 
 WITH top_directors AS
